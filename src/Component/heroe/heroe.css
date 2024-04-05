@@ -1,0 +1,29 @@
+
+.bg_Image {
+    background-image: url('https://mdbcdn.b-cdn.net/img/new/slides/041.webp');
+    height: 400px;
+}
+.mask {
+    background-color: rgba(0, 0, 0, 0.6);
+}
+.firstname {
+        color: rgb(208, 137, 31);
+}
+
+.appraise-btn1 {
+     background-color: rgb(210, 43, 43);
+     color: white;
+}
+.appraise-btn2 {
+    background-color: white;
+    color: rgb(210, 43, 43);
+    border: 1px;
+    border-color: rgb(210, 43, 43);
+    font-size: 14px;
+    width: 120px;
+
+}
+
+.her {
+    size: 20px;
+}

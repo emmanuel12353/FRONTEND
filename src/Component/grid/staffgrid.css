@@ -1,0 +1,40 @@
+.cont {
+    margin-top: 50px;
+}
+.staffgrid1 {
+    border-radius: 20px;
+    border: 1px;
+    background-color: rgb(210, 43, 43);
+    margin: 50px;
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    color: white;
+    font-size: 20px;
+    font-weight: 900;
+}
+.staffgrid2 {
+    border-radius: 20px;
+    border: 1px;
+    background-color: rgb(205, 202, 202);
+    border-bottom-color: rgb(210, 43, 43);
+    margin: 50px;
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    color: rgb(210, 43, 43);
+    font-size: 20px;
+    font-weight: 900;
+}
+.staffgrid3 {
+    border-radius: 20px;
+    border: 1px;
+    background-color: rgb(210, 43, 43);
+    margin: 50px;
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    color: white;
+    font-size: 20px;
+    font-weight: 900;
+}

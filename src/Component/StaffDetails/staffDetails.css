@@ -1,0 +1,94 @@
+
+.card {
+    margin: 60px auto;
+    border: none !important;
+    width: 700px;
+    margin-top: 1%;
+}
+
+@media screen and (max-width: 768px) {
+    .card {
+        width: 350px;
+    }
+}
+
+.card-strip {
+    border-bottom: 1px solid lightgray;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+
+
+.sm-text {
+    font-size: 15px;
+}
+
+.fa {
+    font-size: 30px;
+    padding: 10px;
+}
+
+.fa-comment-o {
+    color: gray;
+    cursor: pointer;
+}
+
+.fa-phone {
+    color: #1E88E5;
+    padding-left: 20px;
+    cursor: pointer;
+}
+
+.time {
+    border: 1px lightgray solid;
+    border-radius: 5px;
+    font-weight: bold;
+    padding: 1px 8px;
+    margin: 0px 6px;
+}
+
+.price {
+    font-size: 20px;
+}
+
+.text-muted {
+    color: #BDBDBD !important;
+}
+
+button:focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    outline-width: 0;
+}
+
+.btn {
+    width: 48%;
+    height: 55px;
+    margin: 20px 0px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.btn-white {
+    background-color: #fff;
+    color: #000;
+    border: 1px gray solid;
+}
+
+.btn-white:hover {
+    background-color: lightgray;
+    color: #000;
+} 
+
+.btn-purple {
+    background-color: #5E35B1;
+    color: #fff;
+    border: 1px #5E35B1 solid;
+}
+
+.btn-purple:hover {
+    background-color: #311B92;
+    color: #fff;
+}
