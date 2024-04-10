@@ -5,6 +5,7 @@ const supervisors = [
         first_name: 'augustine',
         last_name: 'mmerole',
         password: 'augmme',
+        job_role: 'supervisor',
         Staff: [
             {
                 staffId: 'wfm01802',
@@ -51,6 +52,7 @@ const supervisors = [
         last_name: 'oshilim',
         password: 'harosh',
         avatar: 'https://reqres.in/img/faces/7-image.jpg',
+        job_role: 'supervisor',
         Staff: [
             {
                 staffId: 'wfm01967',
@@ -90,6 +92,7 @@ const supervisors = [
         last_name: 'peters',
         password: 'paspet',
         avatar: 'https://reqres.in/img/faces/7-image.jpg',
+        job_role: 'supervisor',
         Staff: [
             {
                 staffId: 'tcs01020',
@@ -121,6 +124,7 @@ const supervisors = [
         last_name: 'Obasohan',
         password: 'stephoba',
         avatar: 'https://reqres.in/img/faces/7-image.jpg',
+        job_role: 'super_admin',
         Staff: [
             {
                 staffId: 'a294555',
