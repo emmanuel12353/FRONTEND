@@ -133,7 +133,7 @@ function Dashboard() {
                         
                         <div className='card main-card2 shadow-lg rounded'>
                         <div class="d-flex justify-content-start align-items-center mt-3 Stafftext">
-                            <span className='Stafftext'>Staffs are yet to be appraised</span> </div>
+                            <span className='Stafftext'>Staffs are yet to be appraise</span> </div>
 
                         {/* <div className='m-4'>
                             <div className="file-input-container">
