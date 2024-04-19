@@ -14,10 +14,12 @@ import './staffDetails.css';
 import Carousel from 'react-bootstrap/Carousel';
 import Form from 'react-bootstrap/Form';
 import Appraisal from '../Appraisal_button.js/appraise';
+import { Appraised } from '../../API/authApi';
 
 const StaffDetails = ({ }) => {
     const location = useLocation();
     const staffId = location.pathname.split('/')[2];
+
 
     const [index, setIndex] = useState(0);
     const dispatch = useAppDispatch();
@@ -28,6 +30,7 @@ const StaffDetails = ({ }) => {
 console.log()
     const { data: staffDetails } = useQuery(['staffDetails', staffId], () =>
         fetchStaffDetails(staffId)
+        
     );
 
     const [scores, setScores] = useState({ score1: '', score2: '', score3: '', score4: '' });
@@ -44,14 +47,16 @@ console.log()
         // You can dispatch an action or perform any other action with the total score
         console.log('Total Score:', totalScore);
         const staffId = staffDetails.staffId;
-        const firstName = staffDetails.first_name;
-        const lastName = staffDetails.last_name;
-        const costCode = staffDetails.cost_code;
+        const firstname = staffDetails.firstname;
+        const email = staffDetails.email;
+        const lastname = staffDetails.lastname;
+        const solId = staffDetails.solId
         const score = totalScore
-        const Appraisal = { staffId, firstName, lastName,costCode, score }
+        const appraisal = { staffId, firstname, lastname, email, solId, score }
         
-        console.log(Appraisal)
-        dispatch(setAppraised(Appraisal))
+        console.log(appraisal)
+        // dispatch(setAppraised(Appraisal))
+        Appraised(appraisal)
     };
 
     if (!staffDetails) {
@@ -74,10 +79,10 @@ console.log()
                         <div class="row d-flex justify-content-between mx-2 px-3 card-strip">
                             <div class="left d-flex flex-column">
                                 <div class="mb-1 fw-bold fs-7">Staff ID: {staffDetails.staffId}</div>
-                                <div class="mb-1 fw-bold fs-7">First Name: {staffDetails.first_name}</div>
-                                <div class="mb-1 fw-bold fs-7">Last Name: {staffDetails.last_name}</div>
-                                <div class="mb-1 fw-bold fs-7">SOL ID: {staffDetails.sol_id}</div>
-                                <div class="mb-1 fw-bold fs-7">Cost Code: {staffDetails.cost_code}</div>
+                                <div class="mb-1 fw-bold fs-7">First Name: {staffDetails.firstname}</div>
+                                <div class="mb-1 fw-bold fs-7">Last Name: {staffDetails.lastname}</div>
+                                <div class="mb-1 fw-bold fs-7">SOL ID: {staffDetails.solId}</div>
+                                <div class="mb-1 fw-bold fs-7">Cost Code: {staffDetails.JobRole}</div>
                                 <div class="mb-1 fw-bold fs-7">Appraisal score: {}</div>
                             </div>
                             <div class="right d-flex">
@@ -133,7 +138,7 @@ console.log()
                                 />
                             </div>
                             <div className="container mb-5 pb-3">
-                                <button type="button" className="btn btn-primary m-5" onClick={calculateTotalScore}>
+                                <button type="button" className="btn btn-primary m-2" onClick={calculateTotalScore}>
                                     Submit
                                 </button>
                                 

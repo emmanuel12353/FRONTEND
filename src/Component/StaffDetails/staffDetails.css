@@ -1,4 +1,6 @@
-
+body {
+    overflow-y: scroll;
+}
 .card {
     margin: 60px auto;
     border: none !important;

@@ -11,6 +11,7 @@ import LoginPage from './Component/login/login';
 import StaffDetails from './Component/StaffDetails/staffDetails';
 import Appraisestaff from './Pages/Appraise';
 import Dashboard from './Pages/dashboard/index';
+// import { signUser } from './API/authApi';
 
 
 
@@ -38,7 +39,7 @@ const Homepage = () => {
    <Routes>
 <Route path="/" element= {<Home /> } />
 <Route path="/appraise" element={<Appraisestaff />} />
-<Route path= "/staff/:staffId" element={<StaffDetails />} />
+<Route path= "/staff/:${staffId}" element={<StaffDetails />} />
 <Route path= "/staff/:dashboard" element={<Dashboard />} />
 </Routes>
    </BrowserRouter>
@@ -67,7 +68,7 @@ const App = () => {
 
 
 {user.isAuthenticated ? (
-        user.user.job_role === 'supervisor' ? (
+        user.user.JobRole === 'supervisor' ? (
           <Routes>
           <Route path="/" element= {<Home /> } />
 <Route path="/appraise" element={<Appraisestaff />} />
@@ -75,7 +76,7 @@ const App = () => {
 <Route path= "/staff/:dashboard" element={<Dashboard />} />
 
 </Routes>
-        ) : user.user.job_role === 'super_admin' ? (
+        ) : user.user.JobRole === 'super_admin' ? (
           <Dashboard />
         ) : (
           <Auth />
