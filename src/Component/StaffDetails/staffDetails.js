@@ -1,6 +1,4 @@
 
-
-
 // StaffDetails.js
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
@@ -10,17 +8,21 @@ import { useAppDispatch, useAppSelector } from '../../hook/hook';
 import { setAppraised } from '../../Slice/AppraiseSlice';
 import Navbar from '../NavBar/index';
 import './staffDetails.css';
-
+import { useNavigate } from "react-router-dom";
 import Carousel from 'react-bootstrap/Carousel';
 import Form from 'react-bootstrap/Form';
 import Appraisal from '../Appraisal_button.js/appraise';
 import { Appraised } from '../../API/authApi';
+import Swal from 'sweetalert2';
+
 
 const StaffDetails = ({ }) => {
     const location = useLocation();
+    const navigate = useNavigate();
     const staffId = location.pathname.split('/')[2];
 
 
+    const [show, setShow] = useState(true);
     const [index, setIndex] = useState(0);
     const dispatch = useAppDispatch();
     // const Appstaff = useAppSelector((state) => state.staffAppraisal.appraised.staffId);
@@ -50,13 +52,59 @@ console.log()
         const firstname = staffDetails.firstname;
         const email = staffDetails.email;
         const lastname = staffDetails.lastname;
-        const solId = staffDetails.solId
-        const score = totalScore
-        const appraisal = { staffId, firstname, lastname, email, solId, score }
-        
-        console.log(appraisal)
-        // dispatch(setAppraised(Appraisal))
-        Appraised(appraisal)
+        const solId = staffDetails.solId;
+        const supervisorId = staffDetails.supervisorId;
+        const score = totalScore;
+
+        const appraisal = { staffId, firstname, lastname, email, solId, score, supervisorId }
+        if(score <= 40){
+            Swal.fire({
+                title: "<h4>THIS WAS NOT SAVED</h4>",
+                html: `
+                <P>the lowest a staff can get is 40</p>
+              `,
+                showCancelButton: true,
+              }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isDenied) {
+                    Swal.fire("Changes are not saved", "", "info");
+                } 
+              });
+        } else if(score >= 100) {
+
+            Swal.fire({
+                title: "<h4>THIS WAS NOT SAVED</h4>",
+                html: `
+                <P>the lowest a staff can get is 99</p>
+              `,
+                showCancelButton: true,
+              }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isDenied) {
+                    Swal.fire("Changes are not saved", "", "info");
+                } 
+              });
+    
+        } else{
+         const { value: score } =  Swal.fire({
+                title: "Do you want to save this appraisal?",
+                showDenyButton: true,
+                showCancelButton: true,
+                confirmButtonText: "Save",
+                denyButtonText: `Don't save`
+              }).then((result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    Appraised(appraisal)
+                  Swal.fire("Saved!", "", "success");
+                  navigate(`/appraise`);
+                } else if (result.isDenied) {
+                  Swal.fire("Changes are not saved", "", "info");
+                }
+              });
+            
+        }
+      
     };
 
     if (!staffDetails) {

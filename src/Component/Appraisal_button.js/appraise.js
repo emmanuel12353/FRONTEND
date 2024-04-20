@@ -78,21 +78,20 @@ const Appraisal = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [staffList, setStaffList] = useState([]);
-
+  const [appraisalGroup, setAppraisalGroup] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get('/v1/staff');
-        console.log(response.data)
+        const AppraisedStaff = await axios.get('/v1/staff/apppraisal')
+        console.log('this is for appraised staff',AppraisedStaff.data.AppraisalList)
         const staff = response.data.staffList;
-        console.log('this is my staff', staff)
-        console.log('this is my staff', staff.length)
-
+        const AppraisalList = AppraisedStaff.data.AppraisalList;
         const filteredStaff = staff.filter((item) => item.supervisorId === user.id.toUpperCase());
+        const filteredAppraisal = AppraisalList.filter((item) => item.supervisorId === user.id.toUpperCase());
         setStaffList(filteredStaff)
-        console.log(filteredStaff)
-        console.log(user.id)
-        console.log(staff._Id)
+        setAppraisalGroup(filteredAppraisal)
+       
 
       } catch (error) {
         console.error("Error fetching staff data:", error);
@@ -102,14 +101,20 @@ const Appraisal = () => {
     fetchData();
   }, [user.id]); // Fetch data whenever user id changes
 
-  const handleStaffDetails = (staffId) => {
-    console.log(staffId)
-    navigate(`/staff/${staffId}`);
-  };
+// navigate to the  major appraisal page
+const handleStaffDetails = (staffId) => {
+  console.log(staffId)
+  navigate(`/staff/${staffId}`);
+};
+
+// the appraised staff 
+
+
 
   return (
     <>
       <Navbar />
+      <div className="container">
       <div className="staff">List of Staff</div>
       <table className="table table-striped tab ">
             <thead className="thead-dark" >
@@ -117,10 +122,9 @@ const Appraisal = () => {
                 <th>STAFF ID</th>
                 <th>FIRST NAME</th>
                 <th>LAST NAME</th>
-                <th>COST CODE</th>
                 <th>SOL ID</th>
-                <th>Roles</th>
-                <th>SCORE</th>
+                
+                <th>Appraise Staff</th>
               </tr>
             </thead>
           {staffList.map((staff) => (
@@ -129,9 +133,7 @@ const Appraisal = () => {
               <td>{staff.staffId}</td>
               <td>{staff.firstname}</td>
               <td>{staff.lastname}</td>
-              <td>{staff.JobRole}</td>
               <td>{staff.solId}</td>
-              <td></td>
               <td>
                 <button className="btn btn-sm appbtn btn-primary" onClick={() => handleStaffDetails(staff.staffId)}>
                   Update Score
@@ -143,6 +145,36 @@ const Appraisal = () => {
          
           ))}
    </table>
+   </div>
+
+<div className="container">
+   <div className="staff">List of Staff</div>
+      <table className="table table-striped tab ">
+            <thead className="thead-dark" >
+              <tr>
+                <th>STAFF ID</th>
+                <th>FIRST NAME</th>
+                <th>LAST NAME</th>
+                <th>SOL ID</th>
+                <th>supervisorId</th>
+               
+                <th>Score</th>
+              </tr>
+            </thead>
+          {appraisalGroup.map((staff) => (
+     
+            <tr key={staff.staffId} className="warning"> 
+              <td>{staff.staffId}</td>
+              <td>{staff.firstname}</td>
+              <td>{staff.lastname}</td>
+              <td>{staff.solId}</td>
+              <td>{staff.supervisorId}</td>
+              <td>{staff.score}</td>
+            </tr>
+         
+          ))}
+   </table>
+   </div>
     </>
   );
 };
