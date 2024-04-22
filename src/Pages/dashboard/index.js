@@ -1,18 +1,73 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // import {Pie, Sector, Cell, ResponsiveContainer } from 'recharts';
 import './dashboard.css';
 import PieChartComponent from '../../Component/Graph/teller';
+import axios from 'axios';
 
 
 
 function Dashboard() {
     const [currentPage, setCurrentPage] = useState('Home');
-
-
+    const [staffCount, setStaffCount] = useState(0);
+    const [appraisalCount, setSappraisalCount] = useState(0);
+    const [appraisalGroup, setAppraisalGroup] = useState([]);
+    const [file, setFile] = useState(null);
+    
+    
 
     const handleButtonClick = (pageName) => {
         setCurrentPage(pageName);
     };
+
+
+    useEffect(() => {
+        const fetchStaffCount = async () => {
+          try {
+            const response = await axios.get("/v1/staff");
+            const data = await axios.get("/v1/staff/apppraisal");
+            const AppraisedStaff = await axios.get('/v1/staff/apppraisal')
+            const Appraised = await data.data.AppraisalList
+            const totalCount  = response.data.staffList.length; // Assuming your API returns the total count in a property called 'totalCount'
+            const totalappraised = data.data.AppraisalList.length;
+
+            setStaffCount(totalCount);
+            setSappraisalCount(totalappraised)
+            setAppraisalGroup(Appraised)
+          } catch (error) {
+            console.error("Error fetching staff count:", error);
+          }
+        };
+    
+        fetchStaffCount();
+      }, []);
+    
+
+console.log(staffCount)
+
+const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+
+      const response = await axios.post("/v1/uploadStaff", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      });
+
+      console.log("File uploaded successfully:", response.data);
+      // Add any additional logic here after successful upload
+    } catch (error) {
+      console.error("Error uploading file:", error);
+    }
+  };
+
 
     const labelStyle = {
         display: 'inline-block',
@@ -63,12 +118,13 @@ function Dashboard() {
                                     <div class="card cardchild mt-3 p-2 px-3 py-2 cchild1">
                                         <div class="d-flex p-2 mt-2 justify-content-between rounded">
                                             <div class="d-flex flex-column"><span class="type">Teller</span>
-                                                <span class="number">132</span></div> <div class="d-flex flex-column">
+                                                <span class="number">{staffCount}</span></div> <div class="d-flex flex-column">
                                                 {/* <img src="https://i.imgur.com/Slxu74c.png" class="logo1" height="40" width="40" /> */}
                                             </div> </div> </div>
                                     <div class="card cardchild mt-3 p-2 px-2 py-3 cchild2">
                                         <div class="d-flex p-2 mt-2 justify-content-between rounded">
-                                            <div class="d-flex flex-column"><span class="type">DSE</span><span class="number">120</span>
+                                            <div class="d-flex flex-column"><span class="type">DSE</span>
+                                            <span class="number">0</span>
 
                                             </div> <div class="d-flex flex-column">
 
@@ -77,7 +133,8 @@ function Dashboard() {
 
                                             </div> </div> </div> <div class="card cardchild mt-3 p-2 px-3 py-3 cchild1">
                                         <div class="d-flex p-2 mt-2 justify-content-between rounded">
-                                            <div class="d-flex flex-column"><span class="type">ancilliary</span><span class="number">25</span></div>
+                                            <div class="d-flex flex-column"><span class="type">ancilliary</span>
+                                            <span class="number">0</span></div>
                                             <div class="d-flex flex-column">
                                                 {/* <img src="https://i.imgur.com/xvUzRjK.png" class="logo3" height="40" width="40" /> */}
                                             </div> </div> </div>
@@ -86,19 +143,20 @@ function Dashboard() {
 
                             <div className='card main-card shadow-lg rounded'>
                                 <div class="d-flex justify-content-start align-items-center mt-3 Stafftext">
-                                    <span className='Stafftext'>Total Number Of Outsourced Staff</span> </div>
+                                    <span className='Stafftext'>Total Number Of Appraised Staff</span> </div>
 
-
+                                 
                                 <div class="d-flex flex-row gap-3 p-2 m-2">
                                     <div class="card cardchild mt-3 p-2 px-3 py-2 cchild1">
                                         <div class="d-flex p-2 mt-2 justify-content-between rounded">
                                             <div class="d-flex flex-column"><span class="type">Teller</span>
-                                                <span class="number">132</span></div> <div class="d-flex flex-column">
+                                                <span class="number">{appraisalCount}</span></div> <div class="d-flex flex-column">
                                                 {/* <img src="https://i.imgur.com/Slxu74c.png" class="logo1" height="40" width="40" /> */}
                                             </div> </div> </div>
                                     <div class="card cardchild mt-3 p-2 px-2 py-3 cchild2">
                                         <div class="d-flex p-2 mt-2 justify-content-between rounded">
-                                            <div class="d-flex flex-column"><span class="type">DSE</span><span class="number">120</span>
+                                            <div class="d-flex flex-column"><span class="type">DSE</span>
+                                            <span class="number">0</span>
 
                                             </div> <div class="d-flex flex-column">
 
@@ -107,7 +165,8 @@ function Dashboard() {
 
                                             </div> </div> </div> <div class="card cardchild mt-3 p-2 px-3 py-3 cchild1">
                                         <div class="d-flex p-2 mt-2 justify-content-between rounded">
-                                            <div class="d-flex flex-column"><span class="type">ancilliary</span><span class="number">25</span></div>
+                                            <div class="d-flex flex-column"><span class="type">ancilliary</span>
+                                            <span class="number">0</span></div>
                                             <div class="d-flex flex-column">
                                                 {/* <img src="https://i.imgur.com/xvUzRjK.png" class="logo3" height="40" width="40" /> */}
                                             </div> </div> </div>
@@ -133,7 +192,32 @@ function Dashboard() {
                         
                         <div className='card main-card2 shadow-lg rounded'>
                         <div class="d-flex justify-content-start align-items-center mt-3 Stafftext">
-                            <span className='Stafftext'>Staffs are yet to be appraise</span> </div>
+                        <div className="container">
+   <div className="staff">List of Staff</div>
+      <table className="table table-striped">
+            <thead className="thead-dark" >
+              <tr>
+                <th>STAFF ID</th>
+                <th>FIRST NAME</th>
+                <th>LAST NAME</th>
+                <th>SOL ID</th>
+               
+                <th>Score</th>
+              </tr>
+            </thead>
+          {appraisalGroup.map((staff) => (
+     
+            <tr key={staff.staffId} className="warning"> 
+              <td>{staff.staffId}</td>
+              <td>{staff.firstname}</td>
+              <td>{staff.lastname}</td>
+              <td>{staff.solId}</td>
+              <td>{staff.score}</td>
+            </tr>
+         
+          ))}
+   </table>
+   </div> </div>
 
                         {/* <div className='m-4'>
                             <div className="file-input-container">
@@ -175,8 +259,8 @@ function Dashboard() {
                                         <span className='Stafftext'> Teller Staff Upload </span> </div>
 
                                     <div className='m-4'>
-                                        <div className="file-input-container">
-                                            <input class="form-control form-control-lg" type="file" placeholder=".form-control-lg" />
+                                        <div className="file-input-container" onSubmit={handleSubmit}> 
+                                            <input class="form-control form-control-lg" type="file" placeholder=".form-control-lg" onChange={handleFileChange} />
                                             <label htmlFor="file-input" className="file-input-label m-2">
                                                 Choose File
                                             </label>

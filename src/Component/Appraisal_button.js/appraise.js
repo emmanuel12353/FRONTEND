@@ -113,9 +113,10 @@ const handleStaffDetails = (staffId) => {
 
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="container">
-      <div className="staff">List of Staff</div>
+        <div className="card">
+      <div className="staff pb-3">List of Staff</div>
       <table className="table table-striped tab ">
             <thead className="thead-dark" >
               <tr>
@@ -146,9 +147,11 @@ const handleStaffDetails = (staffId) => {
           ))}
    </table>
    </div>
+   </div>
 
 <div className="container">
-   <div className="staff">List of Staff</div>
+  <div className="card">
+   <div className="staff pb-3">List of appraised Staff</div>
       <table className="table table-striped tab ">
             <thead className="thead-dark" >
               <tr>
@@ -174,6 +177,7 @@ const handleStaffDetails = (staffId) => {
          
           ))}
    </table>
+   </div>
    </div>
     </>
   );
