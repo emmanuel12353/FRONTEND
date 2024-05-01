@@ -62,7 +62,7 @@ const LoginPage = () => {
 
 
     try {
-      const response = await axios.post('/v1/login', {
+      const response = await axios.post('https://uba-outsourced.onrender.com/v1/login', {
         email,
         password
       });
