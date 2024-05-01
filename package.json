@@ -4,7 +4,7 @@
   "private": true,
   "main": "index",
   "homepage": "./",
-  "proxy": "https://uba-outsourced.onrender.com",
+  "proxyy": "https://uba-outsourced.onrender.com",
   "proxys": "http://127.0.0.1:8000",
   "dependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",

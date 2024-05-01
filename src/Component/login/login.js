@@ -14,6 +14,7 @@ import axios from 'axios';
 
 import supervisors from '../../API/dataApi';
 import './login.css';
+import Swal from 'sweetalert2';
 
 
 const LoginPage = () => {
@@ -24,7 +25,6 @@ const LoginPage = () => {
   const dispatch = useAppDispatch();
 
   const user = useAppSelector(setUser);
-  console.log(user)
 
 
   const handleInputChange = (e) => {
@@ -38,6 +38,19 @@ const LoginPage = () => {
     const { email, password } = state;
 
     if (!email || !password) {
+      Swal.fire({
+        title: "<h4>kindly fill</h4>",
+        html: `
+        <P>you are to fill in your details</p>
+      `,
+        showCancelButton: true,
+      }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isDenied) {
+            Swal.fire("Changes are not saved", "", "info");
+        } 
+      });
+
       console.log('Fill in the required information');
       return;
     }
@@ -74,11 +87,26 @@ const LoginPage = () => {
       console.log('this is the current user', user)
       } else {
         console.log('fail')
+        Swal.fire({
+          title: "<h4>unable to login</h4>",
+          html: `
+          <P>this user cannot login, kinldy  contact HR for assistance</p>
+        `,
+          showCancelButton: true,
+        })
       }
     } catch (error) {
       console.error('Error during login:', error);
+      Swal.fire({
+        title: "<h4>unable to login</h4>",
+        html: `
+        <P>this user cannot login, kinldy  contact HR for assistance</p>
+      `,
+        showCancelButton: true,
+      })
       
     }
+  
   
 
 
