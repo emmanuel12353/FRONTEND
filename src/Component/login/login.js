@@ -178,11 +178,17 @@ return (
             required
           />
         <br /> */}
-              <button type="submit" className='btn btn-primary'>
-              {load ? <LoadingIcons.Bars />: 
-              <span>login</span>
-              }
+              <div>
+              {load ? 
+               <button type="submit" className='btn btn-primary'>
+              <LoadingIcons.Bars />
               </button>
+              : 
+               <button type="submit" className='btn btn-primary'>
+              <span>login</span>
+              </button>
+              }
+              </div>
             
             </form>
           </div>
