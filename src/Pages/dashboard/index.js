@@ -25,7 +25,7 @@ function Dashboard() {
           try {
             const response = await axios.get("/v1/staff");
             const data = await axios.get("/v1/staff/apppraisal");
-            const AppraisedStaff = await axios.get('/v1/staff/apppraisal')
+            const AppraisedStaff = await axios.get('https://uba-outsourced.onrender.com/v1/staff/apppraisal')
             const Appraised = await data.data.AppraisalList
             const totalCount  = response.data.staffList.length; // Assuming your API returns the total count in a property called 'totalCount'
             const totalappraised = data.data.AppraisalList.length;

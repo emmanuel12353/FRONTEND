@@ -82,8 +82,8 @@ const Appraisal = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('/v1/staff');
-        const AppraisedStaff = await axios.get('/v1/staff/apppraisal')
+        const response = await axios.get('https://uba-outsourced.onrender.com/v1/staff');
+        const AppraisedStaff = await axios.get('https://uba-outsourced.onrender.com/v1/staff/apppraisal')
         console.log('this is for appraised staff',AppraisedStaff.data.AppraisalList)
         const staff = response.data.staffList;
         const AppraisalList = AppraisedStaff.data.AppraisalList;

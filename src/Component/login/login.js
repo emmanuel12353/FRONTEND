@@ -110,21 +110,7 @@ const LoginPage = () => {
 
 
 
-  // const matchingSupervisor = supervisors.find(
-  //   (supervisor) => supervisor.email === email && supervisor.password === password
-  // );
 
-  // if (!matchingSupervisor) {
-  //   console.log('These credentials do not exist');
-  //   return;
-  // }
-
-  // // Handle successful login
-  // console.log('Login successful:', matchingSupervisor);
-
-  // dispatch(setloading());
- 
-  // dispatch(setUser(matchingSupervisor));
 
 };
 
@@ -180,12 +166,12 @@ return (
         <br /> */}
               <div>
               {load ? 
-               <button type="submit" className='btn btn-primary'>
-              <LoadingIcons.Bars />
+               <button type="submit" className='btn btn-primary p-5 pt-1'>
+              <LoadingIcons.Oval className='loading' />
               </button>
               : 
                <button type="submit" className='btn btn-primary'>
-              <span>login</span>
+              login
               </button>
               }
               </div>

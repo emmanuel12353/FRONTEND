@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const fetchStaffDetails = async (staffId) => {
     try {
-        const response = await axios.get('/v1/staff');
+        const response = await axios.get('https://uba-outsourced.onrender.com/v1/staff');
 
         const Staff = response.data.staffList;
 

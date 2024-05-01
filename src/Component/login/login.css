@@ -3,6 +3,11 @@
     font-weight: 500;
 }
  
+.loading {
+    width: 24px;
+    padding-top: 0px;
+    margin-top: 0px;
+}
  .bb-login {
     margin-top: 100px;
     margin-bottom:300px; 
