@@ -15,12 +15,14 @@ import axios from 'axios';
 import supervisors from '../../API/dataApi';
 import './login.css';
 import Swal from 'sweetalert2';
+import LoadingIcons from 'react-loading-icons';
 
 
 
 
 const LoginPage = () => {
   const [state, setState] = useState({ email: '', password: '' });
+  const [load, setLoad] = useState(false)
 
 
   // const navigate = useNavigate();
@@ -60,7 +62,7 @@ const LoginPage = () => {
    
 
 
-
+     setLoad(true)
     try {
       const response = await axios.post('https://uba-outsourced.onrender.com/v1/login', {
         email,
@@ -76,8 +78,11 @@ const LoginPage = () => {
       dispatch(setUser(user));
 
       console.log('this is the current user', user)
+      setLoad(false)
       } else {
+        setLoad(false)
         console.log('fail')
+
         Swal.fire({
           title: "<h4>unable to login</h4>",
           html: `
@@ -87,6 +92,7 @@ const LoginPage = () => {
         })
       }
     } catch (error) {
+      setLoad(false)
       Swal.fire({
         title: "<h4>unable to login</h4>",
         html: `
@@ -172,8 +178,12 @@ return (
             required
           />
         <br /> */}
-              <button type="submit" className='btn btn-primary'>Login</button>
-
+              <button type="submit" className='btn btn-primary'>
+              {load ? <LoadingIcons.Bars />: 
+              <span>login</span>
+              }
+              </button>
+            
             </form>
           </div>
         </div>
