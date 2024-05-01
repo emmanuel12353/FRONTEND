@@ -17,6 +17,8 @@ import './login.css';
 import Swal from 'sweetalert2';
 
 
+
+
 const LoginPage = () => {
   const [state, setState] = useState({ email: '', password: '' });
 
@@ -55,18 +57,7 @@ const LoginPage = () => {
       return;
     }
 
-    // const LoginUser = axios({
-    //   method: 'post',
-    //   url: '/v1/login',
-    //   data: {
-    //     email: email,
-    //     password: password
-    //   }
-    // });
-    // console.log(LoginUser)
-    // if (LoginUser.status === 200) {
-    //   console.log('this is ok')
-    // }
+   
 
 
 
@@ -96,7 +87,6 @@ const LoginPage = () => {
         })
       }
     } catch (error) {
-      console.error('Error during login:', error);
       Swal.fire({
         title: "<h4>unable to login</h4>",
         html: `
