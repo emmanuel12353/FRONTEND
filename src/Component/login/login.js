@@ -24,6 +24,7 @@ const LoginPage = () => {
   const dispatch = useAppDispatch();
 
   const user = useAppSelector(setUser);
+  console.log(user)
 
 
   const handleInputChange = (e) => {
