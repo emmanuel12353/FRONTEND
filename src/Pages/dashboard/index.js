@@ -11,6 +11,7 @@ function Dashboard() {
     const [staffCount, setStaffCount] = useState(0);
     const [appraisalCount, setSappraisalCount] = useState(0);
     const [appraisalGroup, setAppraisalGroup] = useState([]);
+    const [sqaapp, setSqaapp] = useState([]);
     const [file, setFile] = useState(null);
     
     
@@ -25,14 +26,20 @@ function Dashboard() {
           try {
             const response = await axios.get("https://uba-outsourced.onrender.com/v1/staff");
             const data = await axios.get("https://uba-outsourced.onrender.com/v1/staff/apppraisal");
-            const AppraisedStaff = await axios.get('https://uba-outsourced.onrender.com/v1/staff/apppraisal')
-            const Appraised = await data.data.AppraisalList
+            const AppraisedStaff = await axios.get('https://uba-outsourced.onrender.com/v1/staff/apppraisal');
+            const sqa = await axios.get('https://uba-outsourced.onrender.com/v1/AppraisalUpload')
+       
+        
+            const Appraised = await data.data.AppraisalList;
             const totalCount  = response.data.staffList.length; // Assuming your API returns the total count in a property called 'totalCount'
             const totalappraised = data.data.AppraisalList.length;
+            const sqaAppraised = sqa.data.staffList
+            console.log('na im be this',sqaAppraised)
 
             setStaffCount(totalCount);
             setSappraisalCount(totalappraised)
             setAppraisalGroup(Appraised)
+            setSqaapp(sqaAppraised)
           } catch (error) {
             console.error("Error fetching staff count:", error);
           }
@@ -96,8 +103,8 @@ const handleFileChange = (event) => {
                                     <i class="fa fa-users"></i><span>Appraised Staffs</span></button>
                                 <button class="btn navbar" onClick={() => handleButtonClick('Contact')}>
                                     <i class="fa fa-download" aria-hidden="true"></i> <span>Upload</span></button>
-                                <button class="btn navbar">
-                                    <span>Knowlwdge</span></button>
+                                <button class="btn navbar" onClick={() => handleButtonClick('SQA')}>
+                                    <span>SQA APPRAISAL</span></button>
                                 <button class="btn">
                                     <span>Dashboard</span></button>
                             </div>
@@ -188,6 +195,47 @@ const handleFileChange = (event) => {
 
                         }
 
+
+
+{currentPage === 'SQA' && <div>
+
+  <div className='card main-card2 shadow-lg rounded'>
+                        <div class="d-flex justify-content-start align-items-center mt-3 Stafftext">
+                        <div className="container">
+   <div className="staff">List of Staff</div>
+      <table className="table table-striped">
+            <thead className="thead-dark" >
+              <tr>
+                <th>STAFF ID</th>
+                <th>FIRST NAME</th>
+                <th>LAST NAME</th>
+                <th>SOL ID</th>
+               
+                <th>Score</th>
+              </tr>
+            </thead>
+          {sqaapp.map((staff) => (
+     
+            <tr key={staff.staffId} className="warning"> 
+              <td>{staff.staffId}</td>
+              <td>{staff.firstname}</td>
+              <td>{staff.lastname}</td>
+              <td>{staff.solId}</td>
+              <td>{staff.Score * 100}</td>
+            </tr>
+         
+          ))}
+   </table>
+   </div> </div>
+   </div>
+    
+</div>
+
+}
+
+
+
+
                         {currentPage === 'About' && 
                         
                         <div className='card main-card2 shadow-lg rounded'>
@@ -236,19 +284,7 @@ const handleFileChange = (event) => {
                         {currentPage === 'Contact' &&
 
 
-                            // <div className='card main-card shadow-lg rounded'>
-                            //     <div class="d-flex justify-content-start align-items-center mt-3 Stafftext">
-                            //         <span className='Stafftext'> Teller Staff Upload </span> </div>
-
-                            //     <div className='m-4'>
-                            //         <div className="file-input-container">
-                            //             <input class="form-control form-control-lg" type="file" placeholder=".form-control-lg" />
-                            //             <label htmlFor="file-input" className="file-input-label m-2">
-                            //                 Choose File
-                            //             </label>
-                            //         </div>
-                            //     </div>
-                            //    </div>
+                    
 
 
                             <div>
@@ -393,6 +429,8 @@ const handleFileChange = (event) => {
 
 
     );
+
+    
 }
 
 export default Dashboard;

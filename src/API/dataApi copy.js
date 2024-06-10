@@ -1,11 +1,5 @@
-const supervisors = [
-    {
-        id: 'a29455',
-        email: 'augustinemmerole@gmail.com',
-        first_name: 'augustine',
-        last_name: 'mmerole',
-        password: 'augmme',
-        Staff: [
+const staffs = [
+  
             {
                 staffId: 'wfm01802',
                 first_name: 'victor',
@@ -40,18 +34,10 @@ const supervisors = [
                 cost_code: '0999',
                 sol_id: 'Q10',
                 score: 'null',
-            }
+            },
             
-        ]
-    },
-    {
-        id: 'a28264',
-        email: 'harryoshilim@gmail.com',
-        first_name: 'harryson',
-        last_name: 'oshilim',
-        password: 'harosh',
-        avatar: 'https://reqres.in/img/faces/7-image.jpg',
-        Staff: [
+      
+
             {
                 staffId: 'wfm01967',
                 first_name: 'ayomide',
@@ -78,19 +64,8 @@ const supervisors = [
                 score: 'null',
                 
 
-            }
-        ]
-    },
+            },
 
-
-    {
-        id: 'a31798',
-        email: 'pascalpee2022@gmail.com',
-        first_name: 'pascal',
-        last_name: 'peters',
-        password: 'paspet',
-        avatar: 'https://reqres.in/img/faces/7-image.jpg',
-        Staff: [
             {
                 staffId: 'tcs01020',
                 first_name: 'mary',
@@ -110,18 +85,9 @@ const supervisors = [
                 
 
             },
-        ]
-    },
+       
 
 
-    {
-        id: 'a29122',
-        email: 'obasohan@gmail.com',
-        first_name: 'Stephen',
-        last_name: 'Obasohan',
-        password: 'stephoba',
-        avatar: 'https://reqres.in/img/faces/7-image.jpg',
-        Staff: [
             {
                 staffId: 'a294555',
                 first_name: 'augustine',
@@ -151,8 +117,6 @@ const supervisors = [
                 
 
             }
-        ]
-    },
 
 
     

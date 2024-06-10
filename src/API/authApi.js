@@ -21,6 +21,16 @@ export const Appraised = async (appraisal) =>{
     }
 }
 
+export const Telappraised = async (appraisal) =>{
+    try{
+        const response = await axios.get('/v1/staff/apppraisal');
+        console.log(response)
+        return response;
+    } catch(error) {
+        throw error.response.data
+    }
+}
+
 
 export const getStaff = async (userData) =>{
     try{
