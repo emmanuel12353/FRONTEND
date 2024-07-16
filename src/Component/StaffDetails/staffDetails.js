@@ -241,32 +241,32 @@ const StaffDetails = () => {
         const lastname = staffDetails.lastname;
         const solId = staffDetails.solId;
         const supervisorId = staffDetails.supervisorId;
-        const score = totalScore / 2;
+        const score = totalScore;
 
         console.log('Total Score:', score);
         const appraisal = { staffId, firstname, lastname, email, solId, score, supervisorId };
 
-        if (score <= 40) {
-            Swal.fire({
-                title: "<h4>THIS WAS NOT SAVED</h4>",
-                html: "<p>The lowest a staff can get is 40</p>",
-                showCancelButton: true,
-            }).then((result) => {
-                if (result.isDenied) {
-                    Swal.fire("Changes are not saved", "", "info");
-                }
-            });
-        } else if (score >= 100) {
-            Swal.fire({
-                title: "<h4>THIS WAS NOT SAVED</h4>",
-                html: "<p>The highest a staff can get is 99</p>",
-                showCancelButton: true,
-            }).then((result) => {
-                if (result.isDenied) {
-                    Swal.fire("Changes are not saved", "", "info");
-                }
-            });
-        } else {
+        // if (score <= 40) {
+        //     Swal.fire({
+        //         title: "<h4>THIS WAS NOT SAVED</h4>",
+        //         html: "<p>The lowest a staff can get is 40</p>",
+        //         showCancelButton: true,
+        //     }).then((result) => {
+        //         if (result.isDenied) {
+        //             Swal.fire("Changes are not saved", "", "info");
+        //         }
+        //     });
+        // } else if (score >= 100) {
+        //     Swal.fire({
+        //         title: "<h4>THIS WAS NOT SAVED</h4>",
+        //         html: "<p>The highest a staff can get is 99</p>",
+        //         showCancelButton: true,
+        //     }).then((result) => {
+        //         if (result.isDenied) {
+        //             Swal.fire("Changes are not saved", "", "info");
+        //         }
+        //     });
+        // } else {
             Swal.fire({
                 title: "Do you want to save this appraisal?",
                 showDenyButton: true,
@@ -283,12 +283,13 @@ const StaffDetails = () => {
                     } catch (error) {
                         Swal.fire("Error!", "There was an error saving the appraisal.", "error");
                         console.error('Error posting appraisal:', error);
+                        navigate(`/appraise`);
                     }
                 } else if (result.isDenied) {
                     Swal.fire("Changes are not saved", "", "info");
                 }
             });
-        }
+        // }
     };
 
     if (!staffDetails) {
